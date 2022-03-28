@@ -4,20 +4,25 @@
     <div class="thumb">
       <div class="custom-control custom-checkbox">
         <!-- 复选框 -->
-        <input type="checkbox" class="custom-control-input" id="cb1" :checked="true" />
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="cb1"
+          :checked="state"
+        />
         <label class="custom-control-label" for="cb1">
           <!-- 商品的缩略图 -->
-          <img src="../../assets/logo.png" alt="" />
+          <img :src="pic" alt="" />
         </label>
       </div>
     </div>
     <!-- 右侧信息区域 -->
     <div class="goods-info">
       <!-- 商品标题 -->
-      <h6 class="goods-title">商品名称商品名称商品名称商品名称</h6>
+      <h6 class="goods-title">{{ title }}</h6>
       <div class="goods-info-bottom">
         <!-- 商品价格 -->
-        <span class="goods-price">￥0</span>
+        <span class="goods-price">￥{{ price }}</span>
         <!-- 商品的数量 -->
       </div>
     </div>
@@ -25,7 +30,35 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    //id作用：以后商品的状态发生改变时需要子向父传值，父组件则根据id修改状态
+    id: {
+      require: true,
+      type: Number
+    },
+    //要渲染商品的标题
+    title: {
+      default: "",
+      type: String,
+    },
+    //要渲染商品的图片
+    pic: {
+      default: "",
+      type: String,
+    },
+    //要渲染商品的价格
+    price: {
+      default: 0,
+      type: Number,
+    },
+    //要渲染商品的选中状态
+    state: {
+      default: true,
+      type: Boolean,
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
