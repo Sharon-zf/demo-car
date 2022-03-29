@@ -7,11 +7,12 @@
         <input
           type="checkbox"
           class="custom-control-input"
-          id="cb1"
+          :id="'cb' + id"
           :checked="state"
+          @change="stateChange"
         />
-        <label class="custom-control-label" for="cb1">
-          <!-- 商品的缩略图 -->
+        <label class="custom-control-label" :for="'cb' + id">
+          <!-- 商品的图片 -->
           <img :src="pic" alt="" />
         </label>
       </div>
@@ -35,7 +36,7 @@ export default {
     //id作用：以后商品的状态发生改变时需要子向父传值，父组件则根据id修改状态
     id: {
       require: true,
-      type: Number
+      type: Number,
     },
     //要渲染商品的标题
     title: {
@@ -56,6 +57,12 @@ export default {
     state: {
       default: true,
       type: Boolean,
+    },
+  },
+  methods: {
+    stateChange(e) {
+      const newState = e.target.checked;
+      this.$emit('state-change', { id: this.id, value: newState });
     },
   },
 };

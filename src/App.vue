@@ -12,6 +12,7 @@
       :pic="item.goods_img"
       :price="item.goods_price"
       :state="item.goods_state"
+      @state-change="getNewState"
     ></Goods>
   </div>
 </template>
@@ -25,7 +26,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      //存储购物车数据的列表，默认为空1
+      //存储购物车数据的列表，默认为空
       list: [],
     };
   },
@@ -39,6 +40,14 @@ export default {
       if (res.status === 200) {
         this.list = res.list;
       }
+    },
+    getNewState(e) {
+      this.list.some((item) => {
+        if (item.id === e.id) {
+          item.goods_state = e.value;
+          return true;
+        }
+      });
     },
   },
   //注册组件
