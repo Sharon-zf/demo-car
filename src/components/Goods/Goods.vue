@@ -25,13 +25,16 @@
         <!-- 商品价格 -->
         <span class="goods-price">￥{{ price }}</span>
         <!-- 商品的数量 -->
+        <Counter :num="count" :id="id"></Counter>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import  Counter from "@/components/Counter/Counter.vue";
 export default {
+  
   props: {
     //id作用：以后商品的状态发生改变时需要子向父传值，父组件则根据id修改状态
     id: {
@@ -58,13 +61,23 @@ export default {
       default: true,
       type: Boolean,
     },
+    //要渲染的商品数量
+    count: {
+      default: 1,
+      typeof:Number,
+    }
   },
+  //复选框被点击后调用此函数
   methods: {
     stateChange(e) {
       const newState = e.target.checked;
-      this.$emit('state-change', { id: this.id, value: newState });
+      //点击后在vue根组件中触发自定义事件state-change
+      this.$emit("state-change", { id: this.id, value: newState });
     },
   },
+  components:{
+    Counter,
+  }
 };
 </script>
 
