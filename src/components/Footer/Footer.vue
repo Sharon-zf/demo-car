@@ -39,6 +39,7 @@ export default {
       default: 0,
       typeof: Number,
     },
+    //渲染已勾选的商品数量
     number: {
       default:0,
       typeof:Number,

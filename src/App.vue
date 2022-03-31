@@ -31,7 +31,7 @@ import Goods from "@/components/Goods/Goods.vue";
 import Footer from "@/components/Footer/Footer.vue";
 //引入axios
 import axios from "axios";
-
+//引入EventBus
 import bus from "@/components/eventBus.js"
 
 export default {
@@ -62,6 +62,7 @@ export default {
           )
       );
     },
+    //筛选出状态为true的商品并将所有商品的goods_count相加
     number(){
       return (
         this.list.filter(item => item.goods_state)
@@ -73,6 +74,8 @@ export default {
   },
   created() {
     this.initCartList();
+    //接受counter组件传来的数据然后通过id查找对应商品
+    //再更改该商品的num
     bus.$on("share",val=>{
       this.list.some(item=>{
         if(item.id===val.id){

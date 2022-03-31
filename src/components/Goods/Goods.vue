@@ -32,6 +32,7 @@
 </template>
 
 <script>
+//引入组件
 import  Counter from "@/components/Counter/Counter.vue";
 export default {
   
